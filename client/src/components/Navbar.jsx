@@ -17,7 +17,7 @@ const PAGE_TITLES = {
 function titleFor(pathname) {
   if (PAGE_TITLES[pathname]) return PAGE_TITLES[pathname];
   const match = Object.keys(PAGE_TITLES).find((path) => pathname.startsWith(`${path}/`));
-  return match ? PAGE_TITLES[match] : 'TaskFlow';
+  return match ? PAGE_TITLES[match] : 'ToDoList';
 }
 
 export default function Navbar({ onMenuClick }) {
@@ -60,7 +60,7 @@ export default function Navbar({ onMenuClick }) {
         <Link
           to="/dashboard"
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-ink transition-opacity hover:opacity-90"
-          aria-label="TaskFlow home"
+          aria-label="ToDoList home"
         >
           <CheckCheck size={16} strokeWidth={2.6} aria-hidden="true" />
         </Link>

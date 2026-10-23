@@ -104,7 +104,7 @@ export default function Settings() {
     <div className="space-y-6">
       <PageHeader
         title="Settings"
-        description="Tune TaskFlow to fit the way you work. Preferences stay in this browser."
+        description="Tune ToDoList to fit the way you work. Preferences stay in this browser."
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -165,7 +165,7 @@ export default function Settings() {
                 options={VIEW_OPTIONS}
               />
               <p className="mt-1.5 text-[11px] text-muted">
-                Where TaskFlow opens when you visit the app.
+                Where ToDoList opens when you visit the app.
               </p>
             </div>
             <div>
@@ -224,7 +224,7 @@ export default function Settings() {
             </h2>
           </div>
           <p className="mt-1 text-[13px] leading-5 text-muted">
-            Tasks are stored in MongoDB through the TaskFlow API, so they survive refreshes and
+            Tasks are stored in MongoDB through the ToDoList API, so they survive refreshes and
             restarts. Theme and display preferences live in this browser's localStorage.
           </p>
           <div className="mt-4 rounded-xl border border-line bg-bg px-3 py-2.5 text-[12px] leading-5 text-muted">

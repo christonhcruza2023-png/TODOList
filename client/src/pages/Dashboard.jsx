@@ -131,7 +131,7 @@ export default function Dashboard() {
             <EmptyState
               icon={Sparkles}
               title="Your board is clear"
-              description="TaskFlow is ready when you are. Create your first task and it will show up across your dashboard, views, and categories."
+              description="ToDoList is ready when you are. Create your first task and it will show up across your dashboard, views, and categories."
               action={
                 <button type="button" className="btn-primary" onClick={openCreate}>
                   <Plus size={16} aria-hidden="true" />

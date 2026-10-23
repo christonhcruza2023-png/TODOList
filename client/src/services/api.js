@@ -22,7 +22,7 @@ http.interceptors.response.use(
       const message =
         error.code === 'ECONNABORTED'
           ? 'The request timed out. Please try again.'
-          : 'Cannot reach the TaskFlow API. Make sure the server is running.';
+          : 'Cannot reach the ToDoList API. Make sure the server is running.';
       return Promise.reject(new ApiError(message, 0));
     }
     const { status, data } = error.response;

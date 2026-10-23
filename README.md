@@ -1,8 +1,19 @@
-# TaskFlow
+# ToDoList
 
-A complete, minimal task-management web app built with **React + Vite + Tailwind CSS** on the frontend and **Node.js + Express + MongoDB (Mongoose)** on the backend. Tasks are persisted in MongoDB — not in mock data or localStorage — and every view, filter, statistic, and theme is backed by the real API.
+<p>
+  <a href="https://REPLACE-WITH-YOUR-LIVE-APP-URL">
+    <img src="https://img.shields.io/badge/Open%20ToDoList-Live%20web%20app-2563eb?style=for-the-badge" alt="Open the ToDoList web app" />
+  </a>
+</p>
 
-TaskFlow is a **single-user demo**: there is no authentication. Anyone who can reach the app can read and modify its tasks.
+**Open the app directly in your browser:** [https://REPLACE-WITH-YOUR-LIVE-APP-URL](https://REPLACE-WITH-YOUR-LIVE-APP-URL)
+
+> Replace the two links above with your deployed address (Vercel, Netlify, Railway, Render, etc.).
+> Running it locally? Use **[http://localhost:5173](http://localhost:5173)** after `npm run dev`.
+
+A complete task-management web app built with **React + Vite + Tailwind CSS** on the frontend and **Node.js + Express + MongoDB (Mongoose)** on the backend. Tasks are persisted in MongoDB — not in mock data or localStorage — and every view, filter, statistic, and theme is backed by the real API.
+
+ToDoList is a **single-user demo**: there is no authentication. Anyone who can reach the app can read and modify its tasks.
 
 ---
 
@@ -29,12 +40,14 @@ TaskFlow is a **single-user demo**: there is no authentication. Anyone who can r
 | Database | MongoDB (`taskflow_db` → `tasks`) |
 | Tests | Node test runner + Supertest (API), Playwright (browser E2E) |
 
+> The app and repo are named **ToDoList**, but internal identifiers kept their original names (`taskflow_db`, `taskflow.theme`, package names). They are unchanged on purpose, so existing databases and saved browser preferences keep working.
+
 ---
 
 ## Project structure
 
 ```
-taskflow/
+TODOList/
 ├── client/
 │   ├── index.html                 # No-flash theme bootstrap
 │   ├── package.json
@@ -110,7 +123,7 @@ CLIENT_ORIGIN=http://localhost:5173,http://localhost:4173
 npm run dev
 ```
 
-Open **http://localhost:5173**. The API runs at **http://localhost:5000**, and Vite proxies `/api` requests to it.
+Then open **[http://localhost:5173](http://localhost:5173)** in your browser — that URL is the ToDoList app. The API runs at **http://localhost:5000**, and Vite proxies `/api` requests to it.
 
 > If your local MongoDB is not running, start it (`net start MongoDB` on Windows) or use an Atlas URI. The server exits with a clear message when the database is unreachable.
 
@@ -128,7 +141,7 @@ npm run build        # builds client/dist
 npm run start        # serves API + built SPA on http://localhost:5000
 ```
 
-With `client/dist` present, Express serves the SPA and falls back to `index.html` for client-side routes. API routes still return JSON (including JSON 404s).
+With `client/dist` present, Express serves the SPA and falls back to `index.html` for client-side routes, so **http://localhost:5000** opens the app directly. API routes still return JSON (including JSON 404s).
 
 ---
 
@@ -141,7 +154,7 @@ With `client/dist` present, Express serves the SPA and falls back to `index.html
 | `MONGO_URI` | Yes | MongoDB connection string. Use Atlas in production. |
 | `PORT` | No | API port. Defaults to `5000`; Render provides this automatically. |
 | `NODE_ENV` | No | `development`, `production`, or `test`. Production enables the CORS allowlist. |
-| `CLIENT_ORIGIN` | Production | Comma-separated browser origins allowed by CORS, e.g. `https://taskflow.onrender.com`. |
+| `CLIENT_ORIGIN` | Production | Comma-separated browser origins allowed by CORS, e.g. `https://your-app.vercel.app`. |
 
 `MONGO_URI` is never sent to the client. `.env` files are git-ignored; only `.env.example` is committed.
 
@@ -316,26 +329,27 @@ Tasks are **never** stored in localStorage.
 ### 1. Create a MongoDB Atlas database
 
 1. Create a free cluster at [MongoDB Atlas](https://www.mongodb.com/atlas).
-2. Add a database user and allow network access (Render's IPs, or `0.0.0.0/0` for a demo).
+2. Add a database user and allow network access (your host's IPs, or `0.0.0.0/0` for a demo).
 3. Copy the connection string and append the database name:  
    `mongodb+srv://USER:PASSWORD@cluster.mongodb.net/taskflow_db?retryWrites=true&w=majority`
 
-### 2. Push the project to GitHub
+### 2. Repository
+
+The project is already published at **[github.com/christonhcruza2023-png/TODOList](https://github.com/christonhcruza2023-png/TODOList)**.
+
+To push further changes:
 
 ```bash
-git init
 git add .
-git commit -m "Build TaskFlow task manager"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/taskflow.git
-git push -u origin main
+git commit -m "Describe your change"
+git push
 ```
 
 `.env` is ignored; `.env.example` is committed.
 
-### 3. Deploy the full app on Render (recommended)
+### 3. Deploy the full app as one service
 
-Create a **Web Service** from the repository:
+Pick any Node host (Render, Railway, Fly.io, a VPS…). Build the client, then start the Express server — it serves the built SPA and the API from a single URL.
 
 | Setting | Value |
 | --- | --- |
@@ -349,18 +363,21 @@ Environment variables:
 ```env
 MONGO_URI=mongodb+srv://…/taskflow_db?retryWrites=true&w=majority
 NODE_ENV=production
-CLIENT_ORIGIN=https://your-service.onrender.com
+CLIENT_ORIGIN=https://your-app-url
 ```
 
-`PORT` is supplied by Render and read by `server.js`. The Express server serves `client/dist` and handles SPA fallback, so the frontend and API share one URL.
+`PORT` is provided by the host and read by `server.js`. Because the SPA and API share one URL, opening the deployed address loads ToDoList directly.
 
-### 4. Optional: host the frontend separately
+### 4. Optional: host the frontend on a static host (Vercel, Netlify, Cloudflare Pages)
 
-- Build a static site from `client` with `VITE_API_URL=https://your-api.onrender.com/api` and publish `client/dist` (rewrite all routes to `/index.html`).
-- Deploy `server` as its own Web Service with `MONGO_URI` and `NODE_ENV=production`.
-- Add the static site's URL to `CLIENT_ORIGIN` on the API.
+1. Build a static site from `client` with `VITE_API_URL=https://your-api-url/api` and publish `client/dist`.
+2. Rewrite all routes to `/index.html` so client-side routes work on refresh.
+3. Deploy `server` separately with `MONGO_URI` and `NODE_ENV=production`.
+4. Add the static site's URL to `CLIENT_ORIGIN` on the API.
 
-Free Render services may sleep when idle, so the first request can take a few seconds.
+Once deployed, put the public URL in the two links at the top of this README.
+
+Free tiers may sleep when idle, so the first request can take a few seconds.
 
 ---
 

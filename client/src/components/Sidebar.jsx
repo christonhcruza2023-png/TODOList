@@ -41,7 +41,7 @@ export default function Sidebar({ collapsed = false, mobile = false, onToggleCol
         </span>
         {showLabels ? (
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-tight text-ink">TaskFlow</p>
+            <p className="truncate text-sm font-semibold tracking-tight text-ink">ToDoList</p>
             <p className="truncate text-[11px] text-muted">Plan. Focus. Finish.</p>
           </div>
         ) : null}
