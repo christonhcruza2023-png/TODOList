@@ -1,15 +1,16 @@
 # ToDoList
 
 <p>
-  <a href="https://REPLACE-WITH-YOUR-LIVE-APP-URL">
-    <img src="https://img.shields.io/badge/Open%20ToDoList-Live%20web%20app-2563eb?style=for-the-badge" alt="Open the ToDoList web app" />
+  <a href="http://localhost:5173">
+    <img src="https://img.shields.io/badge/Open%20ToDoList-App-2563eb?style=for-the-badge" alt="Open the ToDoList app" />
   </a>
 </p>
 
-**Open the app directly in your browser:** [https://REPLACE-WITH-YOUR-LIVE-APP-URL](https://REPLACE-WITH-YOUR-LIVE-APP-URL)
+**Open the app in your browser:** [http://localhost:5173](http://localhost:5173)
 
-> Replace the two links above with your deployed address (Vercel, Netlify, Railway, Render, etc.).
-> Running it locally? Use **[http://localhost:5173](http://localhost:5173)** after `npm run dev`.
+> This is the local address served by `npm run dev`, so it works on the machine running the project.
+> Start it with the [quick start](#quick-start) steps below, then open the link.
+> Once you deploy to a public host, swap the two links above for that URL — see [Deploying publicly](#deploying-publicly).
 
 A complete task-management web app built with **React + Vite + Tailwind CSS** on the frontend and **Node.js + Express + MongoDB (Mongoose)** on the backend. Tasks are persisted in MongoDB — not in mock data or localStorage — and every view, filter, statistic, and theme is backed by the real API.
 
