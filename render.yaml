@@ -1,0 +1,30 @@
+# Render Blueprint — deploys ToDoList as one always-on Node web service that
+# serves both the built React SPA and the Express API from a single URL.
+#
+# Usage: push this repo to GitHub, then in Render choose
+# "New → Blueprint", pick this repository, and apply.
+#
+# The two `sync: false` variables are intentionally left empty: Render prompts
+# for them in the dashboard, so no secret is stored in git.
+services:
+  - type: web
+    name: todolist
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm --prefix server install && npm --prefix client install --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Your MongoDB Atlas SRV string, including the database name:
+      # mongodb+srv://USER:PASSWORD@cluster0.xxxxx.mongodb.net/todolist_db?retryWrites=true&w=majority
+      - key: MONGO_URI
+        sync: false
+      # The exact public URL Render assigns, e.g. https://todolist.onrender.com
+      # Use https and no trailing slash. Browsers send an Origin header on
+      # same-origin POST/PUT/DELETE, and production CORS checks it against this
+      # value, so a mismatch makes the app's own forms fail with 403.
+      - key: CLIENT_ORIGIN
+        sync: false

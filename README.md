@@ -352,6 +352,10 @@ git push
 
 Pick any Node host (Render, Railway, Fly.io, a VPS…). Build the client, then start the Express server — it serves the built SPA and the API from a single URL.
 
+> **Render:** this repo ships a [`render.yaml`](./render.yaml) blueprint with the build and start commands already set. Choose **New → Blueprint**, select this repository, and Render applies the rest — it will prompt for `MONGO_URI` and `CLIENT_ORIGIN`.
+>
+> Set `CLIENT_ORIGIN` to the **exact** public URL Render gives you (`https`, no trailing slash). Production CORS checks that value against the browser's `Origin` header on same-origin POST/PUT/DELETE requests, so a typo makes the app's own forms return 403. See [.env.production.example](./.env.production.example) for the full list.
+
 | Setting | Value |
 | --- | --- |
 | Root Directory | repository root (empty) |

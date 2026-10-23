@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "TaskFlow - a minimal task management app built with React, Express, and MongoDB",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "install:all": "npm install && npm --prefix server install && npm --prefix client install",
     "dev": "concurrently -n API,WEB -c blue,magenta \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
